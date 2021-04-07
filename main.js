@@ -7,16 +7,15 @@ server.use(express.json());
 server.use(express.urlencoded({extended : true}));
 server.get('/',(req,res) =>{
     //res.send("hello");
-    res.sendFile(__dirname+`/front/main2.html`);
+    res.sendFile(__dirname+`/front/main.html`);
 })
 server.get('/2',(req,res)=>{
-    res.sendFile(__dirname+`/front/main.html`);
+    res.sendFile(__dirname+`/front/message.html`);
     
 })
 server.post('/req',(req,res)=>{
-    res.send(req.body);
     console.log(req.body);
-    const {user, message} = req.body;
+    res.send(req.body);
 })
 
 server.listen(PORT);
