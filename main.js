@@ -1,10 +1,11 @@
 const express = require("express");
 const server = express();
 const mysql = require("mysql");
-const PORT = 5007;
+const PORT = 5000;
 
 server.use(express.json());
 server.use(express.urlencoded({extended : true}));
+
 server.get('/',(req,res) =>{
     //res.send("hello");
     res.sendFile(__dirname+`/front/main.html`);

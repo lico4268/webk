@@ -2,7 +2,7 @@ const mysql = require("mysql");
 
 var db_info = {
     host: 'localhost',
-    port: '5007',
+    port: '5000',
     user: 'root',
     password: 'lico4268',
     database: 'test_db'
