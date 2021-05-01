@@ -5,15 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>post</title>
+    <style>
+        #post {
+            top:50%;
+            left:50%
+        }
+    </style>
 </head>
 <body>
-    <h1>post</h1>
-    <form action="http://localhost:5000/req" method="post">
-        <h3>type : id</h3>
-        id: <input type = 'text' name='id'>
-        <h3>type : message</h3>
-        message : <input type="text" name='message'><br><br>
-        <input type = 'submit'>
+    <h1>메시지 보내기</h1>
+    <form action="http://localhost:5000/req" method="post" id = "post">
+        <p>아이디 :</p>
+        <input type = 'text' name='id'>
+        <p>메시지 :</p>
+        <textarea name="message" id="" cols="50" rows="10"></textarea>
+        <br><br>
+        <input type = 'submit' value="전송">
+        <input type="reset" value="다시 입력">
     </form>
 </body>
 </html>

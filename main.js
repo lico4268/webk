@@ -24,15 +24,15 @@ server.post('/req',(req,res)=>{
     res.send(req.body);
     const userid = req.body.id;
     const message = req.body.message;
-    var param= [userid,message];
     if(userid&&message){
-        conn.query(`INSERT INTO test_db.user(userid,contents) VALUES(?,?)`,param,function(error,results,field){
+        conn.query(`INSERT INTO test_db.user(userid,contents) VALUES(?,?)`,[userid,message],function(error,results,field){
             if(error){
                 console.log(error);
             }
             console.log(results);
         })
     }
+    else console.log("NULL")
     conn.end;
 })
 
