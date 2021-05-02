@@ -25,7 +25,7 @@ server.post('/req',(req,res)=>{
     const userid = req.body.id;
     const message = req.body.message;
     if(userid&&message){
-        conn.query(`INSERT INTO test_db.user(userid,contents) VALUES(?,?)`,[userid,message],function(error,results,field){
+        conn.query(`INSERT IGNORE INTO test_db.user(userid,contents) VALUES(?,?)`,[userid,message],function(error,results,field){
             if(error){
                 console.log(error);
             }
