@@ -3,9 +3,12 @@ const server = express();
 const mysql = require("mysql");
 const db_config = require('./db.js');
 const conn = db_config.init();
+const ejs = require("ejs")
 const PORT = 5000;
 
 db_config.init();
+
+server.set('view engine', 'ejs');
 
 server.use(express.json());
 server.use(express.urlencoded({extended : true}));
@@ -21,7 +24,8 @@ server.get('/2',(req,res)=>{
 
 server.post('/req',(req,res)=>{
     console.log(req.body);
-    res.send(req.body);
+    //res.send(req.body);
+    //res.send(alert("준비중입니다."));
     const userid = req.body.id;
     const message = req.body.message;
     if(userid&&message){
@@ -32,8 +36,13 @@ server.post('/req',(req,res)=>{
             console.log(results);
         })
     }
-    else console.log("NULL")
+    else console.log("NULL") 
     conn.end;
+})
+
+server.get('/3',(req,res)=>{
+    console.log("ejs pages")
+    res.render('1')
 })
 
 server.listen(PORT);
