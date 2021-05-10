@@ -11,6 +11,7 @@
     <p>아이디 :</p>
     <input type="text" id='userid'>
     <input type="submit" value='검색' id='submit'>
+    <div id = 'display'>표시 화면</div>
     <script>
         $("#submit").click(function(){
             $.ajax({
@@ -24,6 +25,7 @@
                 success : function(data){
                     if(data.length>0){
                         console.log(data)
+                        showhtml(data);
                     }
                     else alert("none")
                 },
@@ -33,6 +35,23 @@
                 }
             })
         })
+        function showhtml(data){
+            var html = "<table border ='1'>";
+                html += "<tr>";
+                html += "<th>id</th>";
+                html += "<th>message</th>";
+                html +="</tr>";
+            
+            $.each(data, function(key,value){
+                html += "<tr align = 'center'>";
+                html += "<td>" + value.userid + "</td>";
+                html += "<td>" + value.contents + "</td>";
+                html += "</tr>";
+            })
+            html += "</table>";
+            $('#display').empty();
+            $('#display').append(html);
+        }
     </script>
 </body>
 </html>

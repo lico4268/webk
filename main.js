@@ -84,7 +84,6 @@ app.post('/view',(req,res)=>{
         else {
             console.log(rows)
             res.send(rows)
-
         }
     })
 })
@@ -95,10 +94,10 @@ app.get('/3',(req,res)=>{
     var sql ="SELECT * FROM test_db.user WHERE userid = ?"
     var param = ['asdf'];
     conn.query(sql,param,function(err,rows,field){
-        res.send(rows[2])
+        res.send(rows)
         if(rows.length>0){
             console.log(rows.length)
-            console.log(rows[1])
+            console.log(rows[2])
         }
         else console.log("kasdvni")
 
