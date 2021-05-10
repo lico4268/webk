@@ -4,9 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <title>메시지 보기</title>
 </head>
 <body>
-    
+    <p>아이디 :</p>
+    <input type="text" id='userid'>
+    <input type="submit" value='검색' id='submit'>
+    <script>
+        $("#submit").click(function(){
+            $.ajax({
+                url:'http://localhost:5000/view',
+                async:true,
+                type:'POST',
+                data:{
+                    userid : $("#userid").val()
+                },
+                dataType : 'json',
+                success : function(data){
+                    if(data.length>0){
+                        console.log(data)
+                    }
+                    else alert("none")
+                },
+                error : function(err){
+                    alert("connection fail")
+                    console.log(err)
+                }
+            })
+        })
+    </script>
 </body>
 </html>
