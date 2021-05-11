@@ -90,8 +90,26 @@ app.post('/view',(req,res)=>{
 
 app.get('/reply',(req,res)=>{
     res.render('reply')
+    res.end()
 })
 
+app.post('/reply',(req,res)=>{
+    var sqlcnt = "SELECT COUNT(*) as cnt FROM test_db.user"
+    conn.query(sqlcnt,function(err,result){
+        console.log(result)
+        res.json(result)
+    })
+    var rand = Math.random()
+})
+
+app.post('/reply/view',(req,res)=>{
+    var sql ="SELECT * FROM test_db.user WHERE num = ?"
+    var rand = Math.random()
+    console.log(req.body.maxnum)
+    //conn.query(sql,)
+})
+
+/*
 app.get('/3',(req,res)=>{
     console.log("ejs pages");
     var sql ="SELECT * FROM test_db.user WHERE userid = ?"
@@ -102,9 +120,11 @@ app.get('/3',(req,res)=>{
             console.log(rows.length)
             console.log(rows[2])
         }
-        else console.log("kasdvni")
+        else console.log("목록이 없음")
 
     })
+    
 })
+*/
 
 app.listen(PORT);

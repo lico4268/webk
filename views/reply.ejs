@@ -4,9 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <title>reply</title>
 </head>
 <body>
     reply page
+    <input type="submit" value="검색" id="submit">
+    <div id="rmessage"></div>
+    <input type="text" id="reply">
+    <script>
+        $("#submit").click(function(){
+            var randNum = Math.random();
+            var max 
+            $.ajax({
+                url:'http://localhost:5000/reply',
+                async:true,
+                type:'POST',
+                dataType:'json',
+                success:function(data){
+                    console.log(data[0].cnt)
+                    max = data[0].cnt
+                    senrend(max)
+                },
+                error : function() {
+
+                }
+            })
+        })
+        function senrend(data){
+            $.ajax({
+                url:'http://localhost:5000/reply/view',
+                async:true,
+                type:'POST',
+                data:{
+                    maxnum : data
+                },
+                dataType:'json',
+                success: function(data){
+                    console.log("ok")
+                },
+                error : function(err){
+                    console.log(err)
+                }
+            })
+        }
+    </script>
 </body>
 </html>
