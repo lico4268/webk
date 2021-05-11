@@ -88,6 +88,9 @@ app.post('/view',(req,res)=>{
     })
 })
 
+app.get('/reply',(req,res)=>{
+    res.render('reply')
+})
 
 app.get('/3',(req,res)=>{
     console.log("ejs pages");
