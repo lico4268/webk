@@ -40,12 +40,14 @@
                 html += "<tr>";
                 html += "<th>id</th>";
                 html += "<th>message</th>";
+                html += "<th>reply</th>"
                 html +="</tr>";
             
             $.each(data, function(key,value){
                 html += "<tr align = 'center'>";
                 html += "<td>" + value.userid + "</td>";
                 html += "<td>" + value.contents + "</td>";
+                html += "<td>" + value.reply + "</td>";
                 html += "</tr>";
             })
             html += "</table>";

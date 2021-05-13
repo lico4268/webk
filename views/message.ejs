@@ -19,7 +19,7 @@
 
         <script>
             var checkDuple = 0;
-            
+            //send id & message & duplicate alert
             $("#submit").click(function(){
                 if (checkDuple !=0){
                     $.ajax({
@@ -54,6 +54,7 @@
                 else alert("중복확인 필요")
             });
             
+            //find duplicate
             $("#duplicate").click(function(){
                 $.ajax({
                     url:'http://localhost:5000/req/check',

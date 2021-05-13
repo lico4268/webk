@@ -8,11 +8,16 @@
     <title>reply</title>
 </head>
 <body>
-    reply page
+    reply page<p>
     <input type="submit" value="검색" id="submit">
-    <div id="rmessage"></div>
-    <input type="text" id="reply">
+    <div id="display">메시지 표시되는 곳</div>
+    <input type="text" id="reply"><input type="submit" value="전송" id="send">
+
+
+
     <script>
+        var userdata
+        //get random number and print random message
         $("#submit").click(function(){
             var randNum = Math.random();
             var max 
@@ -31,6 +36,33 @@
                 }
             })
         })
+
+        //send reply
+        $("#send").click(function(){
+            $.ajax({
+                url:'http://localhost:5000/reply/send',
+                async:true,
+                type:'POST',
+                dataType:'json',
+                data:{
+                    message : $('#reply').val(),
+                    userid : userdata[0].userid
+                },
+                success : function(data){
+                    console.log("send success")
+                    console.log(userdata)
+                    if(data.status == 1){
+                        alert("완료")
+                    }
+                    else alert("실패")
+                },
+                error : function(err){
+                    console.log(err)
+                }
+            })
+        })
+
+        //get random number from server and show data
         function senrend(data){
             $.ajax({
                 url:'http://localhost:5000/reply/view',
@@ -41,12 +73,33 @@
                 },
                 dataType:'json',
                 success: function(data){
-                    console.log("ok")
+                    //console.log(data)
+                    showhtml(data)
+                    userdata = data
                 },
                 error : function(err){
                     console.log(err)
                 }
             })
+        }
+
+        //show table function
+        function showhtml(data){
+                var html = "<table border ='1'>";
+                    html += "<tr>";
+                    html += "<th>id</th>";
+                    html += "<th>message</th>";
+                    html +="</tr>";
+                
+                $.each(data, function(key,value){
+                    html += "<tr align = 'center'>";
+                    html += "<td>" + value.userid + "</td>";
+                    html += "<td>" + value.contents + "</td>";
+                    html += "</tr>";
+                })
+                html += "</table>";
+                $('#display').empty();
+                $('#display').append(html);
         }
     </script>
 </body>

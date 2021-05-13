@@ -77,7 +77,8 @@ app.get('/view',(req,res)=>{
 app.post('/view',(req,res)=>{
     const requestId = req.body.userid
     var sql ="SELECT * FROM test_db.user WHERE userid = ?"
-    conn.query(sql,[requestId],function(err,rows,field){
+    var sqlReply = "select * from user join reply on user.userid = reply.userid and user.userid = ?"
+    conn.query(sqlReply,[requestId],function(err,rows,field){
         if(err){
             console.log(err)
         }
@@ -96,7 +97,7 @@ app.get('/reply',(req,res)=>{
 app.post('/reply',(req,res)=>{
     var sqlcnt = "SELECT COUNT(*) as cnt FROM test_db.user"
     conn.query(sqlcnt,function(err,result){
-        console.log(result)
+        //console.log(result)
         res.json(result)
     })
     var rand = Math.random()
@@ -104,9 +105,26 @@ app.post('/reply',(req,res)=>{
 
 app.post('/reply/view',(req,res)=>{
     var sql ="SELECT * FROM test_db.user WHERE num = ?"
-    var rand = Math.random()
-    console.log(req.body.maxnum)
-    //conn.query(sql,)
+    var rand = Math.floor(Math.random()*(req.body.maxnum))+1
+    console.log(rand)
+    conn.query(sql,rand,function(err,rows,field){
+        res.send(rows)
+    })
+})
+
+app.post('/reply/send',(req,res)=>{
+    console.log(req.body.message)
+    console.log(req.body.userid)
+    var reply = [req.body.userid,req.body.message]
+    var sql = 'INSERT IGNORE INTO test_db.reply(userid,reply) VALUES(?,?)'
+    conn.query(sql,reply,function(err,rows,field){
+        if(err){
+            console.log(err)
+            res.json({status:0})
+        }
+        res.json({status:1})
+    })
+
 })
 
 /*
