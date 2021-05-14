@@ -83,8 +83,17 @@ app.post('/view',(req,res)=>{
             console.log(err)
         }
         else {
-            console.log(rows)
-            res.send(rows)
+            console.log(rows.length)
+            if(rows.length>0){
+                res.send(rows)
+                console.log(rows)
+            }
+            else{
+                conn.query(sql,[requestId],function(err,rows,field){
+                    res.send(rows)
+                    console.log(rows)
+                })
+            }
         }
     })
 })
